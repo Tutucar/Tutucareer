@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <header class="hd">
+      <div class="hd-left">
+        <div class="hd-title">报价自动填写助手</div>
+        <div class="hd-sub">信息只存本机 · 不联网 · 不上传</div>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <label class="tb-label">资料库：</label>
+      <select id="tplSelect" class="tpl-select"></select>
+      <button id="manageBtn" class="btn btn-small btn-ghost" title="管理资料库">管理</button>
+    </div>
+
+    <div class="actions">
+      <button id="rescanBtn" class="btn btn-ghost">重新扫描本页</button>
+      <button id="fillBtn" class="btn btn-primary">填入网页</button>
+    </div>
+    <div id="msg" class="msg"></div>
+
+    <div id="status" class="status"></div>
+
+    <div id="list" class="scan-list"></div>
+
+    <div id="emptyHint" class="tip" hidden>
+      没有扫描到可填写的项目。请确认当前是普通报价网页（网址以 http/https 开头），
+      并已让表单显示出来，然后点「重新扫描本页」。
+    </div>
+
+    <footer class="ft">
+      <span class="ft-note">勾选「学习」的新项目会在填写后存入当前资料库</span>
+    </footer>
+  </div>
+
+  <script src="defaults.js"></script>
+  <script src="store.js"></script>
+  <script src="matcher.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

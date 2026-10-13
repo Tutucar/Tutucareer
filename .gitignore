@@ -1,0 +1,12 @@
+# 不提交个人数据与备份文件（这些只应留在本机）
+*.json
+!manifest.json
+
+# 系统/编辑器杂项
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# 打包产物（zip 通过 Release 发布，不进仓库）
+*.zip
