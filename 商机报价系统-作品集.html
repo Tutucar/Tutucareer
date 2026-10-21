@@ -121,11 +121,16 @@
   footer{padding:26px 48px 34px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
   .url{color:var(--ink2);font-weight:600;}
 
+  /* 让所有背景色/配色在打印和导出 PDF 时强制保留 */
+  *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  @page{ margin:10mm; }
   @media print{
-    body{background:#fff;}
-    .page{max-width:100%;}
-    section{break-inside:avoid;}
-    .hl,.step,.role,.pp .card{break-inside:avoid;}
+    html,body{background:#fff;}
+    .page{max-width:100%;box-shadow:none;}
+    .hero{border-radius:0;}
+    section{padding:22px 0;}
+    .eyebrow{break-after:avoid;}
+    .hl,.step,.role,.pp .card,.base-item,.mine li{break-inside:avoid;}
   }
   @media(max-width:720px){
     .pad{padding:0 22px;} .hero{padding:38px 22px;}
