@@ -40,6 +40,7 @@ body { width:400px; max-height:600px; overflow-y:auto; font-family:-apple-system
 .badge-ok { background:#e7f6ec; color:var(--ok); }
 .badge-new { background:#ffe9c2; color:var(--new); }
 .badge-empty { background:#f0f0f0; color:#999; }
+.badge-ai { background:#eaf0ff; color:#2f54eb; }
 .sr-body { display:flex; gap:6px; }
 .sr-value { flex:1; border:1px solid var(--line); border-radius:6px; padding:7px 9px; font-size:13px; background:#fff; }
 .sr-value:focus { outline:none; border-color:var(--primary); }

@@ -45,3 +45,20 @@ input:focus{outline:none;border-color:var(--primary);}
 
 .io{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:10px;}
 .io-note{font-size:12px;color:var(--muted);}
+
+/* AI 智能匹配设置 */
+.ai-box{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin-top:18px;}
+.ai-box h2{margin-bottom:10px;}
+.ai-intro{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+.ai-intro b{color:var(--text);}
+.ai-warn{background:#fff8e6;border:1px solid #ffe9a8;color:#8a6d1a;border-radius:6px;padding:9px 11px;margin-top:8px;font-size:12px;line-height:1.7;}
+.ai-warn b{color:#6b530f;}
+.ai-switch{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;margin-bottom:12px;cursor:pointer;}
+.ai-fields{display:flex;flex-direction:column;gap:12px;}
+.ai-field{display:flex;flex-direction:column;gap:4px;}
+.ai-cap{font-size:12px;color:var(--muted);}
+.ai-field select,.ai-field input{border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:13px;background:#fff;width:100%;}
+.ai-actions{display:flex;align-items:center;gap:10px;margin-top:4px;}
+.ai-test{font-size:12px;}
+.ai-test.ok{color:var(--ok);}
+.ai-test.err{color:var(--primary);}

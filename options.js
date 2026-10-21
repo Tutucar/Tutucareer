@@ -134,4 +134,70 @@ $("#importFile").addEventListener("change", e=>{
   reader.readAsText(file);
 });
 
+// ---------- AI 智能匹配设置 ----------
+const aiEnabled = $("#aiEnabled");
+const aiApi = $("#aiApi");
+const aiBaseUrl = $("#aiBaseUrl");
+const aiModel = $("#aiModel");
+const aiKey = $("#aiKey");
+const aiKeyField = $("#aiKeyField");
+const aiFields = $("#aiFields");
+const aiTestMsg = $("#aiTestMsg");
+
+function aiSyncUI() {
+  aiFields.style.display = aiEnabled.checked ? "" : "none";
+  aiKeyField.style.display = aiApi.value === "ollama" ? "none" : "";
+}
+
+async function aiInit() {
+  const cfg = await AI.getConfig();
+  aiEnabled.checked = !!cfg.enabled;
+  aiApi.value = cfg.api || "openai-completions";
+  aiBaseUrl.value = cfg.baseUrl || "";
+  aiModel.value = cfg.model || "";
+  aiKey.value = cfg.apiKey || "";
+  aiSyncUI();
+}
+
+function aiTestShow(t, type) {
+  aiTestMsg.textContent = t;
+  aiTestMsg.className = "ai-test " + (type || "");
+}
+
+async function aiSave() {
+  const enabled = aiEnabled.checked;
+  // 开启且非本机 Ollama 时，申请联网权限
+  if (enabled && aiApi.value !== "ollama") {
+    const granted = await chrome.permissions.request({ origins: ["http://*/*", "https://*/*"] });
+    if (!granted) { aiTestShow("需要联网权限才能调用模型，已取消开启", "err"); aiEnabled.checked = false; aiSyncUI(); return false; }
+  }
+  await AI.setConfig({
+    enabled,
+    api: aiApi.value,
+    baseUrl: aiBaseUrl.value.trim(),
+    model: aiModel.value.trim(),
+    apiKey: aiKey.value.trim()
+  });
+  return true;
+}
+
+aiEnabled.addEventListener("change", aiSyncUI);
+aiApi.addEventListener("change", aiSyncUI);
+$("#aiSaveBtn").addEventListener("click", async () => {
+  if (await aiSave()) aiTestShow("已保存 ✓", "ok");
+});
+$("#aiTestBtn").addEventListener("click", async () => {
+  if (!await aiSave()) return;
+  if (!aiEnabled.checked) { aiTestShow("请先勾选启用", "err"); return; }
+  aiTestShow("正在测试…", "");
+  try {
+    await AI.testConnection();
+    aiTestShow("连接成功，AI 可用 ✓", "ok");
+  } catch (e) {
+    aiTestShow("连接失败：" + (e.message || e), "err");
+  }
+});
+
+aiInit();
+
 init();

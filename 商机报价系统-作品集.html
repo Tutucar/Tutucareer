@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商机智能承接与协同报价系统 · 作品集</title>
+<style>
+  :root{
+    --ink:#101418; --ink2:#3f4752; --muted:#737d8a; --line:#e7eaef;
+    --bg:#ffffff; --soft:#f6f8fb; --soft2:#eef2f7;
+    --brand:#d81e06; --brand-soft:#fdecea;
+    --blue:#2f54eb; --blue-soft:#eef2ff;
+    --green:#0a7d33; --green-soft:#e9f7ee;
+    --amber:#b26a00; --amber-soft:#fff6e5;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei",system-ui,sans-serif;
+    color:var(--ink); background:var(--soft); line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:960px;margin:0 auto;background:var(--bg);}
+  .pad{padding:0 48px;}
+
+  /* ---- Hero ---- */
+  .hero{
+    background:linear-gradient(135deg,#1a1f27 0%,#242c38 60%,#2d3747 100%);
+    color:#fff;padding:52px 48px 46px;
+  }
+  .kicker{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:#9fb0c7;font-weight:600;}
+  .hero h1{font-size:30px;line-height:1.3;margin:12px 0 8px;font-weight:750;letter-spacing:-.01em;}
+  .hero .sub{font-size:15px;color:#c3cdda;max-width:680px;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .chip{
+    font-size:12.5px;padding:6px 13px;border-radius:999px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#dbe3ee;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .chip b{color:#fff;font-weight:600;}
+  .chip.live{background:rgba(216,30,6,.22);border-color:rgba(255,120,100,.5);color:#ffd9d2;}
+  .dot{width:7px;height:7px;border-radius:50%;background:#ff6b57;box-shadow:0 0 0 3px rgba(255,107,87,.25);}
+
+  /* ---- Section ---- */
+  section{padding:38px 0;border-bottom:1px solid var(--line);}
+  section:last-child{border-bottom:none;}
+  .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+  .eyebrow .no{
+    font-size:12px;font-weight:700;color:var(--brand);background:var(--brand-soft);
+    width:26px;height:26px;border-radius:7px;display:grid;place-items:center;flex:0 0 auto;
+  }
+  .eyebrow h2{font-size:19px;font-weight:700;letter-spacing:-.01em;}
+  .lead{font-size:14.5px;color:var(--ink2);max-width:760px;}
+  .lead b{color:var(--ink);}
+
+  /* ---- 痛点 → 方案 ---- */
+  .pp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+  .pp .card{border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+  .pp .card.old{background:var(--soft);}
+  .pp .card.new{background:var(--brand-soft);border-color:#f6cfc9;}
+  .pp h3{font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+  .pp .old h3{color:var(--muted);}
+  .pp .new h3{color:var(--brand);}
+  .pp ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+  .pp li{font-size:13.5px;color:var(--ink2);padding-left:20px;position:relative;}
+  .pp li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:2px;}
+  .pp .old li::before{background:#c2c9d2;}
+  .pp .new li::before{background:var(--brand);}
+
+  /* ---- 五环节流程 ---- */
+  .flow{margin-top:22px;}
+  .flow-track{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;position:relative;}
+  .step{
+    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 13px;position:relative;
+  }
+  .step .idx{font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-soft);
+    padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:9px;}
+  .step h4{font-size:15px;font-weight:700;margin-bottom:9px;}
+  .step ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .step li{font-size:12px;color:var(--muted);padding-left:12px;position:relative;line-height:1.5;}
+  .step li::before{content:"";position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--blue);opacity:.6;}
+  .arrows{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px;}
+  .arrow{text-align:center;color:var(--line);font-size:16px;}
+  .arrow:last-child{visibility:hidden;}
+
+  /* ---- 底座 ---- */
+  .base{margin-top:16px;background:var(--soft2);border-radius:var(--radius);padding:18px 20px;}
+  .base .bt{font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:.05em;margin-bottom:12px;}
+  .base-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .base-item{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:13px 15px;}
+  .base-item .h{font-size:13.5px;font-weight:650;margin-bottom:4px;display:flex;align-items:center;gap:7px;}
+  .base-item .d{font-size:12px;color:var(--muted);line-height:1.5;}
+  .ic{width:9px;height:9px;border-radius:3px;flex:0 0 auto;}
+
+  /* ---- 角色 ---- */
+  .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;}
+  .role{border:1px solid var(--line);border-radius:12px;padding:15px;text-align:center;}
+  .role .rn{font-size:14px;font-weight:700;margin-bottom:6px;}
+  .role .rd{font-size:12px;color:var(--muted);line-height:1.5;}
+  .role .tag{font-size:11px;color:var(--green);background:var(--green-soft);padding:2px 9px;border-radius:999px;display:inline-block;margin-top:8px;}
+
+  /* ---- 亮点 ---- */
+  .highlights{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+  .hl{border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;background:var(--bg);}
+  .hl .ht{font-size:14.5px;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:9px;}
+  .hl .hbadge{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;}
+  .hl .hd{font-size:13px;color:var(--ink2);line-height:1.6;}
+  .b-blue{background:var(--blue-soft);color:var(--blue);}
+  .b-green{background:var(--green-soft);color:var(--green);}
+  .b-amber{background:var(--amber-soft);color:var(--amber);}
+  .b-brand{background:var(--brand-soft);color:var(--brand);}
+
+  /* ---- 我的角色 ---- */
+  .mine{background:var(--soft);border-radius:var(--radius);padding:22px 24px;margin-top:6px;}
+  .mine ul{list-style:none;display:flex;flex-direction:column;gap:11px;}
+  .mine li{font-size:13.5px;color:var(--ink2);padding-left:24px;position:relative;}
+  .mine li::before{content:"✓";position:absolute;left:0;top:0;color:var(--brand);font-weight:800;font-size:13px;}
+  .mine li b{color:var(--ink);}
+
+  footer{padding:26px 48px 34px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+  .url{color:var(--ink2);font-weight:600;}
+
+  @media print{
+    body{background:#fff;}
+    .page{max-width:100%;}
+    section{break-inside:avoid;}
+    .hl,.step,.role,.pp .card{break-inside:avoid;}
+  }
+  @media(max-width:720px){
+    .pad{padding:0 22px;} .hero{padding:38px 22px;}
+    .pp,.highlights{grid-template-columns:1fr;}
+    .flow-track,.arrows,.base-grid,.roles{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="kicker">AI 产品实践 · 政企采购</div>
+    <h1>商机智能承接与协同报价系统</h1>
+    <p class="sub">面向政企采购场景，用 AI 贯穿「承接—找品—寻源—报价—复盘」全链路，把分散、手工、难复盘的报价流程，升级为一套多角色在线协同、权限安全可控的商机承接引擎。</p>
+    <div class="hero-meta">
+      <span class="chip live"><span class="dot"></span>已上线运行</span>
+      <span class="chip">部署平台 <b>京东想象力平台</b></span>
+      <span class="chip">形态 <b>内外网双应用</b></span>
+      <span class="chip">我的角色 <b>需求定义 + 核心研发</b></span>
+    </div>
+  </div>
+
+  <div class="pad">
+
+    <!-- 01 背景 -->
+    <section>
+      <div class="eyebrow"><span class="no">01</span><h2>要解决什么问题</h2></div>
+      <p class="lead">政企客户一次采购往往涉及上百行商品，需求由项目组、采销、运营多方手工流转。信息承接不统一、找品比价靠人工经验、报价质量不稳、结果难以复盘沉淀——响应慢、确定性差。本系统把这条链路产品化、标准化。</p>
+      <div class="pp">
+        <div class="card old">
+          <h3>改造前 · 人力驱动</h3>
+          <ul>
+            <li>需求多入口流入，字段口径不统一</li>
+            <li>找品、比价依赖人工经验，耗时长</li>
+            <li>报价缺少同品比价依据，质量波动</li>
+            <li>中标 / 失败原因无结构化沉淀</li>
+          </ul>
+        </div>
+        <div class="card new">
+          <h3>改造后 · 系统 + AI 驱动</h3>
+          <ul>
+            <li>统一承接入口，AI 自动抽取标准字段</li>
+            <li>品类识别 + 自动路由到对口采销</li>
+            <li>可配置报价模板 + 同品比价 + 人工确认</li>
+            <li>响应看板 + 中标归因，数据可复盘</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 核心链路 -->
+    <section>
+      <div class="eyebrow"><span class="no">02</span><h2>核心链路：五大业务环节</h2></div>
+      <p class="lead">一条商机从进入系统到完成复盘，流经五个标准化环节，每个环节都由 AI 与系统能力支撑。</p>
+      <div class="flow">
+        <div class="flow-track">
+          <div class="step"><span class="idx">① 承接</span><h4>需求承接</h4><ul><li>AI 解析自然语言 / 表格 / 附件</li><li>字段标准化</li><li>缺失项自动追问</li></ul></div>
+          <div class="step"><span class="idx">② 找品</span><h4>找品推荐</h4><ul><li>品类识别</li><li>商品召回与替代品</li><li>路由到对口采销</li></ul></div>
+          <div class="step"><span class="idx">③ 寻源</span><h4>寻源判断</h4><ul><li>供给可得性</li><li>交付 / 库存风险</li><li>品牌限制提示</li></ul></div>
+          <div class="step"><span class="idx">④ 报价</span><h4>协同报价</h4><ul><li>可配置报价模板</li><li>采销在线填报 + 同品比价</li><li>人工确认 + 导出</li></ul></div>
+          <div class="step"><span class="idx">⑤ 复盘</span><h4>复盘沉淀</h4><ul><li>采销响应看板</li><li>中标 / 失败归因</li><li>数据资产沉淀</li></ul></div>
+        </div>
+        <div class="arrows"><div class="arrow">→</div><div class="arrow">→</div><div class="arrow">→</div><div class="arrow">→</div><div class="arrow"></div></div>
+      </div>
+
+      <div class="base">
+        <div class="bt">支撑底座</div>
+        <div class="base-grid">
+          <div class="base-item"><div class="h"><span class="ic" style="background:var(--blue)"></span>多角色协同</div><div class="d">项目组、采销、运营、管理者各自视图，同一商机在线协作流转。</div></div>
+          <div class="base-item"><div class="h"><span class="ic" style="background:var(--brand)"></span>字段级权限与脱敏</div><div class="d">下游只可填报价字段、需求侧只读；脱敏贯穿页面与导出双链路。</div></div>
+          <div class="base-item"><div class="h"><span class="ic" style="background:var(--green)"></span>内外网双应用</div><div class="d">内网供员工协同、外网供供应商报价，共享同一套数据层。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 角色 -->
+    <section>
+      <div class="eyebrow"><span class="no">03</span><h2>谁在用 · 角色分工</h2></div>
+      <div class="roles">
+        <div class="role"><div class="rn">项目组</div><div class="rd">提报商机、补充需求、查看报价建议</div><span class="tag">提报</span></div>
+        <div class="role"><div class="rn">采销 / 寻源</div><div class="rd">找品、比价、在线填报价、确认供给</div><span class="tag">填报</span></div>
+        <div class="role"><div class="rn">运营负责人</div><div class="rd">监控进度、处理卡点、催办协同</div><span class="tag">监控</span></div>
+        <div class="role"><div class="rn">管理者</div><div class="rd">看报出率、中标率、响应时效看板</div><span class="tag">复盘</span></div>
+      </div>
+    </section>
+
+    <!-- 04 关键设计 -->
+    <section>
+      <div class="eyebrow"><span class="no">04</span><h2>关键产品设计</h2></div>
+      <div class="highlights">
+        <div class="hl"><div class="ht"><span class="hbadge b-blue">AI 架构</span>规则 + 大模型混合</div><div class="hd">稳定环节走规则，判断环节（解析需求、识别品类、匹配同款）调用大模型，兼顾准确、成本与可控。</div></div>
+        <div class="hl"><div class="ht"><span class="hbadge b-brand">安全</span>字段级权限脱敏</div><div class="hd">明确下游仅可编辑报价相关字段、需求侧只读，并让脱敏口径同步覆盖导出链路，杜绝导表越权。</div></div>
+        <div class="hl"><div class="ht"><span class="hbadge b-green">架构</span>内外网双应用共享数据</div><div class="hd">内网自动带工号登录、可连内网商品库；外网供供应商报价；两套入口共用一份数据，口径一致。</div></div>
+        <div class="hl"><div class="ht"><span class="hbadge b-amber">灵活</span>可配置报价模板</div><div class="hd">按商机自定义采销填写字段与需求展示列，预设可复用，适配不同行业品类的报价表形态。</div></div>
+      </div>
+    </section>
+
+    <!-- 05 我的角色 -->
+    <section>
+      <div class="eyebrow"><span class="no">05</span><h2>我的角色与贡献</h2></div>
+      <div class="mine">
+        <ul>
+          <li><b>产品需求定义</b>：从业务痛点出发，输出完整 PRD（背景、目标、角色、流程、页面、数据、验收、风险）。</li>
+          <li><b>核心功能研发</b>：在双人协作中独立承担报价协同、字段权限脱敏、采销响应反馈中心、可配置报价模板等关键模块。</li>
+          <li><b>AI 能力落地</b>：接入大模型完成需求解析与商品类目识别，坚持「规则做稳定、大模型做判断」的混合策略。</li>
+          <li><b>工程与发布规范</b>：遵循以 Git 为事实源的发布流程——改前拉取、本地分角色验证、热部署、推回仓库、冲突停手人工确认。</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <span>商机智能承接与协同报价系统 · 个人 AI 产品实践</span>
+    <span class="url">fluiofla1szw.joyapp.jd.com</span>
+  </footer>
+
+</div>
+</body>
+</html>

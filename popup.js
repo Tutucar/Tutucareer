@@ -65,19 +65,45 @@ async function scan() {
   for (const m of matched) {
     rows.push({
       control: m.control, entry: m.entry, value: m.value, isNew: false,
-      learn: false, formatNote: m.format ? (m.format.note || "") : ""
+      learn: false, formatNote: m.format ? (m.format.note || "") : "", bySource: "rule"
     });
   }
+
+  // AI 补一轮：把规则没认出的字段交给大模型做语义归类（仅在已配置并开启时）
+  let aiUsed = false, aiMatchedControls = new Set();
+  try {
+    if (await AI.isEnabled() && unmatched.length) {
+      statusEl.textContent = "规则匹配完成，正在用 AI 识别其余字段…";
+      const suggestions = await AI.suggest(unmatched, tpl.entries);
+      aiUsed = true;
+      for (const s of suggestions) {
+        const val = Store.entryValue(s.entry);
+        rows.push({
+          control: s.control, entry: s.entry, value: val, isNew: false,
+          learn: false, formatNote: "", bySource: "ai"
+        });
+        aiMatchedControls.add(s.control);
+      }
+    }
+  } catch (e) {
+    showMsg("AI 识别失败：" + (e.message || e) + "（已回退为纯规则匹配）", "err");
+  }
+
+  // 剩下 AI 也没认出的，才算新项目
   for (const c of unmatched) {
-    rows.push({ control: c, entry: null, value: "", isNew: true, learn: true, formatNote: "" });
+    if (aiMatchedControls.has(c)) continue;
+    rows.push({ control: c, entry: null, value: "", isNew: true, learn: true, formatNote: "", bySource: "rule" });
   }
   // 维持页面顺序
   rows.sort((a, b) => controls.indexOf(a.control) - controls.indexOf(b.control));
 
   const autoCount = rows.filter(r => !r.isNew && r.value).length;
+  const aiCount = rows.filter(r => r.bySource === "ai" && r.value).length;
   const newCount = rows.filter(r => r.isNew).length;
   statusEl.innerHTML = `本页共 <b>${controls.length}</b> 项：已自动匹配 <b>${autoCount}</b> 项` +
-    (newCount ? `，发现 <b>${newCount}</b> 个新项目（下方可填写并学习）` : "");
+    (aiCount ? `（含 AI 识别 <b>${aiCount}</b> 项）` : "") +
+    (newCount ? `，发现 <b>${newCount}</b> 个新项目（下方可填写并学习）` : "") +
+    (aiUsed && !aiCount ? "，AI 未发现可补充的字段" : "");
   renderList();
 }
 
@@ -91,7 +117,9 @@ function renderList() {
 
     const typeBadge = row.isNew
       ? `<span class="badge badge-new">新项目</span>`
-      : (row.value ? `<span class="badge badge-ok">已匹配</span>` : `<span class="badge badge-empty">库中无值</span>`);
+      : (row.bySource === "ai"
+          ? `<span class="badge badge-ai" title="由 AI 语义识别，请重点核对">AI 识别</span>`
+          : (row.value ? `<span class="badge badge-ok">已匹配</span>` : `<span class="badge badge-empty">库中无值</span>`));
 
     // 多格式下拉（仅已匹配且该条目有多个格式时显示）
     let fmtSelect = "";

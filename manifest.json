@@ -1,12 +1,16 @@
 {
   "manifest_version": 3,
   "name": "报价自动填写助手",
-  "version": "2.0.0",
-  "description": "打开插件自动识别本网站要填的项目，用你的本地资料库自动填写，并不断学习新项目。信息只存本地，绝不联网上传。",
+  "version": "2.1.0",
+  "description": "打开插件自动识别本网站要填的项目，用你的本地资料库自动填写并不断学习；可选开启 AI 语义匹配认出叫法刁钻的字段。资料内容只存本地，绝不上传。",
   "permissions": [
     "storage",
     "activeTab",
     "scripting"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
   ],
   "action": {
     "default_popup": "popup.html",

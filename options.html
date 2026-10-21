@@ -39,6 +39,51 @@
     <input type="file" id="importFile" accept="application/json" hidden>
     <span class="io-note">换电脑时用「导出/导入」迁移你的全部资料库</span>
   </section>
+
+  <section class="ai-box">
+    <h2>AI 智能匹配（可选）</h2>
+    <div class="ai-intro">
+      开启后，当「识别词」规则认不出某个网页字段时，会把<b>字段名</b>和你资料库里的<b>类别名</b>
+      发给你指定的大模型，让它用语义判断该字段属于哪一类，认出叫法刁钻的字段（如“贵司全称”“受托方名称”）。
+      <div class="ai-warn">
+        隐私说明：开启 AI 需要联网。发给模型的<b>只有字段名和类别名</b>，
+        <b>绝不包含</b>姓名、身份证、银行账号等任何具体内容；填值永远在本机完成。
+        关闭 AI 时本扩展完全不联网。密钥只存本机、只发往你填写的服务地址。
+      </div>
+    </div>
+
+    <label class="ai-switch">
+      <input type="checkbox" id="aiEnabled"> 启用 AI 智能匹配
+    </label>
+
+    <div id="aiFields" class="ai-fields">
+      <div class="ai-field">
+        <div class="ai-cap">接口协议</div>
+        <select id="aiApi">
+          <option value="openai-completions">OpenAI 兼容（Oxygen / JoyBuilder / DeepSeek 等，最常用）</option>
+          <option value="anthropic-messages">Anthropic Messages（Claude 原生/兼容）</option>
+          <option value="ollama">Ollama（本机，无需密钥）</option>
+        </select>
+      </div>
+      <div class="ai-field">
+        <div class="ai-cap">服务地址 Base URL（API 根地址，不要加 /chat/completions）</div>
+        <input type="text" id="aiBaseUrl" placeholder="如：https://modelservice.jdcloud.com/v1">
+      </div>
+      <div class="ai-field">
+        <div class="ai-cap">模型 ID</div>
+        <input type="text" id="aiModel" placeholder="如：GLM-5.2 / claude-sonnet-4-6">
+      </div>
+      <div class="ai-field" id="aiKeyField">
+        <div class="ai-cap">API 密钥（只存本机）</div>
+        <input type="password" id="aiKey" placeholder="粘贴你的服务端密钥">
+      </div>
+      <div class="ai-actions">
+        <button id="aiSaveBtn" class="btn btn-primary btn-sm">保存设置</button>
+        <button id="aiTestBtn" class="btn btn-ghost btn-sm">测试连接</button>
+        <span id="aiTestMsg" class="ai-test"></span>
+      </div>
+    </div>
+  </section>
 </div>
 
 <template id="entryTpl">
@@ -70,6 +115,7 @@
 
 <script src="defaults.js"></script>
 <script src="store.js"></script>
+<script src="ai.js"></script>
 <script src="options.js"></script>
 </body>
 </html>
